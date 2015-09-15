@@ -34,6 +34,11 @@ NS_CC_BEGIN
 FontCharMap * FontCharMap::create(const std::string& plistFile)
 {
     std::string pathStr = FileUtils::getInstance()->fullPathForFilename(plistFile);
+    if (!pathStr.size())
+    {
+        return nullptr;
+    }
+
     std::string relPathStr = pathStr.substr(0, pathStr.find_last_of("/"))+"/";
 
     ValueMap dict = FileUtils::getInstance()->getValueMapFromFile(pathStr.c_str());
